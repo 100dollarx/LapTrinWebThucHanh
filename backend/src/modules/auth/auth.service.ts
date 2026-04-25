@@ -22,7 +22,6 @@ export class AuthService {
   ) {}
 
   async register(dto: RegisterDto) {
-    // Kiểm tra trùng username hoặc email
     const existing = await this.userRepo.findOne({
       where: [{ username: dto.username }, { email: dto.email }],
     });
@@ -38,7 +37,7 @@ export class AuthService {
       role: dto.role,
     });
     const saved = await this.userRepo.save(user);
-    const { password: _, ...result } = saved;
+    const { password: _pw, ...result } = saved;
     return result;
   }
 
@@ -75,21 +74,17 @@ export class AuthService {
   async getProfile(userId: number) {
     const user = await this.userRepo.findOne({ where: { id: userId } });
     if (!user) throw new UnauthorizedException();
-    const { password: _, ...result } = user;
+    const { password: _pw, ...result } = user;
     return result;
   }
 
   async changePassword(userId: number, dto: ChangePasswordDto) {
     const user = await this.userRepo.findOne({ where: { id: userId } });
     if (!user) throw new UnauthorizedException();
-
-    // Kiểm tra mật khẩu cũ
     const isMatch = await bcrypt.compare(dto.oldPassword, user.password);
     if (!isMatch) {
       throw new BadRequestException('Mật khẩu hiện tại không đúng');
     }
-
-    // Không cho đặt lại mật khẩu giống cũ
     const isSame = await bcrypt.compare(dto.newPassword, user.password);
     if (isSame) {
       throw new BadRequestException('Mật khẩu mới phải khác mật khẩu cũ');

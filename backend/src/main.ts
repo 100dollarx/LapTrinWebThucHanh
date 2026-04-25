@@ -7,19 +7,15 @@ import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // ✅ Prefix toàn bộ API với /api
   app.setGlobalPrefix('api');
 
-  // ✅ Bật CORS để Frontend (React) gọi được API
   app.enableCors({
     origin: ['http://localhost:5173', 'http://localhost:3001'],
     credentials: true,
   });
 
-  // ✅ Global exception filter — trả lỗi nhất quán
   app.useGlobalFilters(new AllExceptionsFilter());
 
-  // ✅ Validation toàn cục — tự động validate DTO
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -28,7 +24,6 @@ async function bootstrap() {
     }),
   );
 
-  // ✅ Swagger UI tại http://localhost:3000/api-docs
   const config = new DocumentBuilder()
     .setTitle('Student Management API')
     .setDescription('API quản lý sinh viên - NestJS + TypeORM + PostgreSQL')

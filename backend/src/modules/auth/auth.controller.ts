@@ -1,11 +1,4 @@
-import {
-  Controller,
-  Post,
-  Get,
-  Patch,
-  Body,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, Post, Get, Patch, Body, UseGuards } from '@nestjs/common';
 import {
   ApiTags,
   ApiOperation,
@@ -40,7 +33,12 @@ export class AuthController {
     schema: {
       example: {
         access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...',
-        user: { id: 1, username: 'admin', email: 'admin@school.edu.vn', role: 'admin' },
+        user: {
+          id: 1,
+          username: 'admin',
+          email: 'admin@school.edu.vn',
+          role: 'admin',
+        },
       },
     },
   })
@@ -64,12 +62,12 @@ export class AuthController {
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Đổi mật khẩu — nhập mật khẩu cũ và mới' })
   @ApiResponse({ status: 200, description: 'Đổi mật khẩu thành công' })
-  @ApiResponse({ status: 400, description: 'Mật khẩu cũ không đúng hoặc mật khẩu mới trùng cũ' })
+  @ApiResponse({
+    status: 400,
+    description: 'Mật khẩu cũ không đúng hoặc mật khẩu mới trùng cũ',
+  })
   @ApiResponse({ status: 401, description: 'Chưa đăng nhập' })
-  changePassword(
-    @CurrentUser() user: any,
-    @Body() dto: ChangePasswordDto,
-  ) {
+  changePassword(@CurrentUser() user: any, @Body() dto: ChangePasswordDto) {
     return this.authService.changePassword(user.id, dto);
   }
 }

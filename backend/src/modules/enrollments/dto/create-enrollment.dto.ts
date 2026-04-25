@@ -1,5 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import {
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 import { EnrollmentStatus } from '../entities/enrollment.entity';
 
 export class CreateEnrollmentDto {
@@ -16,7 +22,11 @@ export class CreateEnrollmentDto {
   @IsNotEmpty()
   semester: string;
 
-  @ApiProperty({ enum: EnrollmentStatus, example: EnrollmentStatus.ENROLLED, required: false })
+  @ApiProperty({
+    enum: EnrollmentStatus,
+    example: EnrollmentStatus.ENROLLED,
+    required: false,
+  })
   @IsOptional()
   @IsEnum(EnrollmentStatus)
   status?: EnrollmentStatus;

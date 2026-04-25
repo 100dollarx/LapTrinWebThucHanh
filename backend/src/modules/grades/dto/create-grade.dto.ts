@@ -6,14 +6,22 @@ export class CreateGradeDto {
   @IsNumber()
   enrollment_id: number;
 
-  @ApiProperty({ example: 7.5, required: false, description: 'Điểm giữa kỳ (0-10)' })
+  @ApiProperty({
+    example: 7.5,
+    required: false,
+    description: 'Điểm giữa kỳ (0-10)',
+  })
   @IsOptional()
   @IsNumber()
   @Min(0)
   @Max(10)
   midterm_score?: number;
 
-  @ApiProperty({ example: 8.0, required: false, description: 'Điểm cuối kỳ (0-10)' })
+  @ApiProperty({
+    example: 8.0,
+    required: false,
+    description: 'Điểm cuối kỳ (0-10)',
+  })
   @IsOptional()
   @IsNumber()
   @Min(0)

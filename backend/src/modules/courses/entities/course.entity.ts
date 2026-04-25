@@ -35,7 +35,10 @@ export class Course {
   department: Department;
 
   @Column({ type: 'text', nullable: true })
-  @ApiProperty({ example: 'Môn học về lập trình web với HTML, CSS, JS, ReactJS', required: false })
+  @ApiProperty({
+    example: 'Môn học về lập trình web với HTML, CSS, JS, ReactJS',
+    required: false,
+  })
   description: string;
 
   @CreateDateColumn()

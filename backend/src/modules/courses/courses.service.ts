@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  ConflictException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, ILike } from 'typeorm';
 import { Course } from './entities/course.entity';
@@ -32,8 +36,11 @@ export class CoursesService {
   }
 
   async create(dto: CreateCourseDto) {
-    const existing = await this.courseRepo.findOne({ where: { course_code: dto.course_code } });
-    if (existing) throw new ConflictException(`Mã môn ${dto.course_code} đã tồn tại`);
+    const existing = await this.courseRepo.findOne({
+      where: { course_code: dto.course_code },
+    });
+    if (existing)
+      throw new ConflictException(`Mã môn ${dto.course_code} đã tồn tại`);
     const course = this.courseRepo.create(dto);
     return this.courseRepo.save(course);
   }

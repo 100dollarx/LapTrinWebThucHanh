@@ -27,8 +27,11 @@ export class DepartmentsService {
   }
 
   async create(dto: CreateDepartmentDto) {
-    const existing = await this.deptRepo.findOne({ where: { dept_code: dto.dept_code } });
-    if (existing) throw new ConflictException(`Mã khoa ${dto.dept_code} đã tồn tại`);
+    const existing = await this.deptRepo.findOne({
+      where: { dept_code: dto.dept_code },
+    });
+    if (existing)
+      throw new ConflictException(`Mã khoa ${dto.dept_code} đã tồn tại`);
     const dept = this.deptRepo.create(dto);
     return this.deptRepo.save(dept);
   }

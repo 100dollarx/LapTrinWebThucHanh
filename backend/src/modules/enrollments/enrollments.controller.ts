@@ -1,7 +1,20 @@
 import {
-  Controller, Get, Post, Patch, Delete, Body, Param, ParseIntPipe, UseGuards,
+  Controller,
+  Get,
+  Post,
+  Patch,
+  Delete,
+  Body,
+  Param,
+  ParseIntPipe,
+  UseGuards,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiBearerAuth, ApiParam } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiBearerAuth,
+  ApiParam,
+} from '@nestjs/swagger';
 import { EnrollmentsService } from './enrollments.service';
 import { CreateEnrollmentDto } from './dto/create-enrollment.dto';
 import { UpdateEnrollmentDto } from './dto/update-enrollment.dto';
@@ -17,7 +30,9 @@ export class EnrollmentsController {
 
   @Get()
   @ApiOperation({ summary: 'Danh sách tất cả đăng ký môn học' })
-  findAll() { return this.enrollmentsService.findAll(); }
+  findAll() {
+    return this.enrollmentsService.findAll();
+  }
 
   @Get('student/:studentId')
   @ApiOperation({ summary: 'Danh sách môn đã đăng ký của một sinh viên' })
@@ -35,18 +50,23 @@ export class EnrollmentsController {
   @Post('batch')
   @ApiOperation({
     summary: 'Đăng ký nhiều môn học cùng lúc cho 1 sinh viên',
-    description: 'Trả về kết quả từng môn: success / skipped (đã đăng ký) / error',
+    description:
+      'Trả về kết quả từng môn: success / skipped (đã đăng ký) / error',
   })
   batchCreate(@Body() dto: BatchCreateEnrollmentDto) {
     return this.enrollmentsService.batchCreate(dto);
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Cập nhật trạng thái đăng ký (enrolled/completed/dropped)' })
+  @ApiOperation({
+    summary: 'Cập nhật trạng thái đăng ký (enrolled/completed/dropped)',
+  })
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() dto: UpdateEnrollmentDto,
-  ) { return this.enrollmentsService.update(id, dto); }
+  ) {
+    return this.enrollmentsService.update(id, dto);
+  }
 
   @Delete(':id')
   @ApiOperation({ summary: 'Xóa bản ghi đăng ký môn học' })

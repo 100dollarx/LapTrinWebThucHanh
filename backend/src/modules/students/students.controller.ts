@@ -31,14 +31,21 @@ export class StudentsController {
   constructor(private readonly studentsService: StudentsService) {}
 
   @Get()
-  @ApiOperation({ summary: 'Danh sách sinh viên', description: 'Lấy danh sách sinh viên hỗ trợ phân trang, tìm kiếm và lọc theo lớp.' })
+  @ApiOperation({
+    summary: 'Danh sách sinh viên',
+    description:
+      'Lấy danh sách sinh viên hỗ trợ phân trang, tìm kiếm và lọc theo lớp.',
+  })
   @ApiResponse({ status: 200, description: 'Lấy danh sách thành công' })
   findAll(@Query() query: QueryStudentDto) {
     return this.studentsService.findAll(query);
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Chi tiết sinh viên', description: 'Lấy thông tin chi tiết của một sinh viên theo ID.' })
+  @ApiOperation({
+    summary: 'Chi tiết sinh viên',
+    description: 'Lấy thông tin chi tiết của một sinh viên theo ID.',
+  })
   @ApiParam({ name: 'id', description: 'ID của sinh viên', type: Number })
   @ApiResponse({ status: 200, description: 'Tìm thấy sinh viên' })
   @ApiResponse({ status: 404, description: 'Không tìm thấy sinh viên' })
@@ -47,28 +54,37 @@ export class StudentsController {
   }
 
   @Post()
-  @ApiOperation({ summary: 'Thêm sinh viên mới', description: 'Tạo một bản ghi sinh viên mới trong hệ thống.' })
+  @ApiOperation({
+    summary: 'Thêm sinh viên mới',
+    description: 'Tạo một bản ghi sinh viên mới trong hệ thống.',
+  })
   @ApiResponse({ status: 201, description: 'Tạo thành công' })
   @ApiResponse({ status: 400, description: 'Dữ liệu không hợp lệ' })
-  @ApiResponse({ status: 409, description: 'Mã số sinh viên (student_code) đã tồn tại' })
+  @ApiResponse({
+    status: 409,
+    description: 'Mã số sinh viên (student_code) đã tồn tại',
+  })
   create(@Body() dto: CreateStudentDto) {
     return this.studentsService.create(dto);
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Cập nhật sinh viên', description: 'Chỉnh sửa thông tin sinh viên hiện có.' })
+  @ApiOperation({
+    summary: 'Cập nhật sinh viên',
+    description: 'Chỉnh sửa thông tin sinh viên hiện có.',
+  })
   @ApiParam({ name: 'id', description: 'ID của sinh viên', type: Number })
   @ApiResponse({ status: 200, description: 'Cập nhật thành công' })
   @ApiResponse({ status: 404, description: 'Không tìm thấy sinh viên' })
-  update(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() dto: UpdateStudentDto,
-  ) {
+  update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateStudentDto) {
     return this.studentsService.update(id, dto);
   }
 
   @Delete(':id')
-  @ApiOperation({ summary: 'Xóa sinh viên', description: 'Xóa vĩnh viễn sinh viên khỏi hệ thống.' })
+  @ApiOperation({
+    summary: 'Xóa sinh viên',
+    description: 'Xóa vĩnh viễn sinh viên khỏi hệ thống.',
+  })
   @ApiParam({ name: 'id', description: 'ID của sinh viên', type: Number })
   @ApiResponse({ status: 200, description: 'Xóa thành công' })
   @ApiResponse({ status: 404, description: 'Không tìm thấy sinh viên' })

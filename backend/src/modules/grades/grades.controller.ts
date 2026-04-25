@@ -1,5 +1,13 @@
 import {
-  Controller, Get, Post, Patch, Body, Param, ParseIntPipe, UseGuards, Query,
+  Controller,
+  Get,
+  Post,
+  Patch,
+  Body,
+  Param,
+  ParseIntPipe,
+  UseGuards,
+  Query,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { GradesService } from './grades.service';
@@ -16,7 +24,9 @@ export class GradesController {
 
   @Get()
   @ApiOperation({ summary: 'Danh sách tất cả điểm' })
-  findAll() { return this.gradesService.findAll(); }
+  findAll() {
+    return this.gradesService.findAll();
+  }
 
   @Get('student/:studentId')
   @ApiOperation({ summary: 'Bảng điểm của một sinh viên' })
@@ -26,7 +36,9 @@ export class GradesController {
 
   @Post()
   @ApiOperation({ summary: 'Nhập điểm cho sinh viên' })
-  create(@Body() dto: CreateGradeDto) { return this.gradesService.create(dto); }
+  create(@Body() dto: CreateGradeDto) {
+    return this.gradesService.create(dto);
+  }
 
   @Patch(':id')
   @ApiOperation({ summary: 'Cập nhật điểm' })

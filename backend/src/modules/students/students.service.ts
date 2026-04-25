@@ -4,7 +4,7 @@ import {
   ConflictException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, ILike } from 'typeorm';
+import { FindOptionsWhere, ILike, Repository } from 'typeorm';
 import { Student } from './entities/student.entity';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { UpdateStudentDto } from './dto/update-student.dto';
@@ -21,7 +21,7 @@ export class StudentsService {
     const { page = 1, limit = 10, search, class_id } = query;
     const skip = (page - 1) * limit;
 
-    const where: any = [];
+    const where: FindOptionsWhere<Student>[] = [];
 
     if (search) {
       if (class_id) {

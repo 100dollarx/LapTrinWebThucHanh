@@ -17,7 +17,10 @@ export class QueryStudentDto {
   @Min(1)
   limit?: number = 10;
 
-  @ApiPropertyOptional({ example: 'Nguyen', description: 'Tìm theo tên hoặc MSSV' })
+  @ApiPropertyOptional({
+    example: 'Nguyen',
+    description: 'Tìm theo tên hoặc MSSV',
+  })
   @IsOptional()
   @IsString()
   search?: string;

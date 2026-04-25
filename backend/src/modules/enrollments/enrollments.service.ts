@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  ConflictException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Enrollment } from './entities/enrollment.entity';
@@ -23,14 +27,17 @@ export class EnrollmentsService {
       },
     });
     if (existing) {
-      throw new ConflictException('Sinh viên đã đăng ký môn này trong học kỳ này');
+      throw new ConflictException(
+        'Sinh viên đã đăng ký môn này trong học kỳ này',
+      );
     }
     const enrollment = this.enrollmentRepo.create(dto);
     return this.enrollmentRepo.save(enrollment);
   }
 
   async batchCreate(dto: BatchCreateEnrollmentDto) {
-    const results: { course_id: number; status: string; message: string }[] = [];
+    const results: { course_id: number; status: string; message: string }[] =
+      [];
 
     for (const course_id of dto.course_ids) {
       // Kiểm tra trùng từng môn
@@ -43,7 +50,11 @@ export class EnrollmentsService {
       });
 
       if (existing) {
-        results.push({ course_id, status: 'skipped', message: 'Đã đăng ký môn này trước đó' });
+        results.push({
+          course_id,
+          status: 'skipped',
+          message: 'Đã đăng ký môn này trước đó',
+        });
         continue;
       }
 
@@ -54,14 +65,18 @@ export class EnrollmentsService {
           semester: dto.semester,
         });
         await this.enrollmentRepo.save(enrollment);
-        results.push({ course_id, status: 'success', message: 'Đăng ký thành công' });
+        results.push({
+          course_id,
+          status: 'success',
+          message: 'Đăng ký thành công',
+        });
       } catch {
         results.push({ course_id, status: 'error', message: 'Lỗi khi lưu' });
       }
     }
 
-    const successCount = results.filter(r => r.status === 'success').length;
-    const skippedCount = results.filter(r => r.status === 'skipped').length;
+    const successCount = results.filter((r) => r.status === 'success').length;
+    const skippedCount = results.filter((r) => r.status === 'skipped').length;
 
     return {
       total: dto.course_ids.length,
@@ -84,14 +99,16 @@ export class EnrollmentsService {
 
   async update(id: number, dto: UpdateEnrollmentDto) {
     const enrollment = await this.enrollmentRepo.findOne({ where: { id } });
-    if (!enrollment) throw new NotFoundException(`Đăng ký #${id} không tồn tại`);
+    if (!enrollment)
+      throw new NotFoundException(`Đăng ký #${id} không tồn tại`);
     Object.assign(enrollment, dto);
     return this.enrollmentRepo.save(enrollment);
   }
 
   async remove(id: number) {
     const enrollment = await this.enrollmentRepo.findOne({ where: { id } });
-    if (!enrollment) throw new NotFoundException(`Đăng ký #${id} không tồn tại`);
+    if (!enrollment)
+      throw new NotFoundException(`Đăng ký #${id} không tồn tại`);
     await this.enrollmentRepo.remove(enrollment);
     return { message: `Đã xóa đăng ký #${id}` };
   }
