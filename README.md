@@ -19,11 +19,19 @@ Hướng Dẫn Chạy Dự Án
 
 Bước 1 — Tạo Database
 
-Mở terminal và chạy lệnh dưới đây để tạo database. Nếu mật khẩu PostgreSQL của bạn khác `123456`, hãy thay thế cho phù hợp:
-Mở powershell và chạy lệnh sau:
-
-$env:PGPASSWORD = "123456"
-psql -U postgres -c "CREATE DATABASE student_management;"
+Mở pgAdmin 4 hoặc terminal (PowerShell) để tạo database.
+ 
+ Cách 1: Sử dụng pgAdmin 4 (Khuyến nghị)
+ 1. Mở phần mềm pgAdmin 4 và đăng nhập bằng tài khoản `postgres` (mật khẩu mặc định: `123456`).
+ 2. Ở cột bên trái, mở rộng `Servers` -> `PostgreSQL 14` (hoặc phiên bản bạn cài).
+ 3. Click chuột phải vào mục `Databases` -> Chọn `Create` -> `Database...`
+ 4. Ở ô `Database`, nhập chính xác tên: `student_management`
+ 5. Nhấn `Save` để tạo database.
+ 
+ Cách 2: Sử dụng dòng lệnh (PowerShell)
+ Mở PowerShell, di chuyển đến thư mục gốc của dự án `student-management` và chạy:
+ $env:PGPASSWORD = "123456"
+ psql -U postgres -c "CREATE DATABASE student_management;"
 
 Bước 2 — Cài đặt và Chạy Backend
 
