@@ -1,4 +1,4 @@
-﻿import {
+import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
@@ -20,7 +20,7 @@ export class Grade {
 
   @Column()
   enrollment_id: number;
-  @OneToOne(() => Enrollment)
+  @OneToOne(() => Enrollment, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'enrollment_id' })
   enrollment: Enrollment;
 

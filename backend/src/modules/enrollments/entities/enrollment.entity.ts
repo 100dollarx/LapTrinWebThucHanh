@@ -26,7 +26,7 @@ export class Enrollment {
   @Column()
   student_id: number;
 
-  @ManyToOne(() => Student, { eager: true })
+  @ManyToOne(() => Student, { eager: true, onDelete: 'CASCADE' })
   @JoinColumn({ name: 'student_id' })
   student: Student;
 

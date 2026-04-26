@@ -1,4 +1,4 @@
-﻿
+
 DELETE FROM grades;
 DELETE FROM enrollments;
 DELETE FROM students;
@@ -18,21 +18,21 @@ ALTER SEQUENCE grades_id_seq RESTART WITH 1;
 INSERT INTO users (username, password, email, role, created_at, updated_at) VALUES
 (
   'admin',
-  '$2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+  '$2b$10$nTOHx7TZl6wexPRuUqcEmeN/flP8jVZIUHmEHI6FpA9uKY8migCUm',
   'admin@school.edu.vn',
   'admin',
   NOW(), NOW()
 ),
 (
   'teacher01',
-  '$2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+  '$2b$10$nTOHx7TZl6wexPRuUqcEmeN/flP8jVZIUHmEHI6FpA9uKY8migCUm',
   'teacher01@school.edu.vn',
   'teacher',
   NOW(), NOW()
 ),
 (
   'student01',
-  '$2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+  '$2b$10$nTOHx7TZl6wexPRuUqcEmeN/flP8jVZIUHmEHI6FpA9uKY8migCUm',
   'student01@school.edu.vn',
   'student',
   NOW(), NOW()
